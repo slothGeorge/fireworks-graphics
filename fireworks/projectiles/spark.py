@@ -4,8 +4,8 @@ from projectiles.base_shape import Basic_Moving_Shape
 
 
 class Spark(Basic_Moving_Shape):
-    def __init__(self, x, y, objects):
-        super().__init__(objects)
+    def __init__(self, x, y):
+        super().__init__()
         color = [randint(100,255), randint(100,255), randint(100,255)]
         self.color(f"#{''.join(f'{hex(i)[2:].upper():0>2}' for i in color)}")
         self.goto(x,y)

@@ -1,6 +1,8 @@
+from random import randint
 import turtle
 
 from projectiles.rocket import Rocket
+from projectiles.spark import Spark
 
 
 class Game:
@@ -33,6 +35,8 @@ class Game:
         if len(self.projectiles) > 0:
             for obj in self.projectiles:
                 obj.update()
+                if not obj.is_alive:
+                    self.kill_projectile(obj)
         self.window.ontimer(self.animate, 20)
 
     def run(self):
@@ -41,7 +45,20 @@ class Game:
             self.window.update()
 
     def rocket_launch(self):
-        rocket = Rocket(self.projectiles)
+        rocket = Rocket()
+        self.projectiles.insert(0, rocket)
+    
+    def kill_projectile(self, projectile):
+        self.projectiles.remove(projectile)
+        projectile.kill()
+        if projectile.is_rocket:
+            self.explode_rocket(projectile)
+    
+    def explode_rocket(self, rocket):
+        coordinates = (rocket.xcor(), rocket.ycor())
+        for _ in range(randint(20, 30)):
+            spark = Spark(*coordinates)
+            self.projectiles.insert(0, spark)
 
     def exit(self):
         turtle.bye()
