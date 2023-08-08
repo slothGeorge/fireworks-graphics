@@ -1,12 +1,11 @@
 from random import randint
-import turtle
+
+from projectiles.base_shape import Basic_Moving_Shape
 
 
-class Spark(turtle.Turtle):
+class Spark(Basic_Moving_Shape):
     def __init__(self, x, y, objects):
-        turtle.Turtle.__init__(self)
-        self.penup()
-        self.shape("circle")
+        super().__init__(objects)
         color = [randint(100,255), randint(100,255), randint(100,255)]
         self.color(f"#{''.join(f'{hex(i)[2:].upper():0>2}' for i in color)}")
         self.goto(x,y)
@@ -14,14 +13,4 @@ class Spark(turtle.Turtle):
         self.shapesize(randint(1,4), randint(1,4))
         self.y_speed = randint(20, 50)
         self.x_speed = randint(-20, 20)
-        self.y_acceleration = -6
         self.countdown = randint(7, 21)
-        self.objects = objects
-        self.objects.insert(0, self)
-    def update(self):
-        self.countdown -= 1
-        if self.countdown < 0:
-            self.objects.remove(self)
-            self.clear()
-            self.ht()
-            del self

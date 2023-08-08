@@ -6,7 +6,7 @@ from projectiles.rocket import Rocket
 class Game:
 
     def __init__(self):
-        self.objects = list()
+        self.projectiles: list  = list()
 
         turtle.setup(800, 600)
         turtle.onkey(self.exit, "Escape")
@@ -30,8 +30,8 @@ class Game:
         my_text.hideturtle()
 
     def animate(self):
-        if len(self.objects) > 0:
-            for obj in self.objects:
+        if len(self.projectiles) > 0:
+            for obj in self.projectiles:
                 obj.setx(obj.xcor() + obj.x_speed)
                 obj.sety(obj.ycor() + obj.y_speed)
                 obj.y_speed += obj.y_acceleration
@@ -44,7 +44,7 @@ class Game:
             self.window.update()
 
     def rocket_launch(self):
-        rocket = Rocket(self.objects)
+        rocket = Rocket(self.projectiles)
 
     def exit(self):
         turtle.bye()
