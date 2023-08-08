@@ -33,13 +33,13 @@ class Game:
         my_text.hideturtle()
 
     def animate(self):
-        if len(self.projectiles) > 0:
-            for obj in self.projectiles:
-                obj.update()
-                if not obj.is_alive:
-                    self.kill_projectile(obj)
         self.window.update()
-        sleep(0.02)
+        if not self.projectiles:
+            return
+        for item in self.projectiles:
+            item.update()
+            if not item.is_alive:
+                self.kill_projectile(item)
 
     def run(self):
         while True:
@@ -47,6 +47,7 @@ class Game:
                 self.animate()
             except turtle.Terminator:
                 return
+            sleep(0.02)
 
     def rocket_launch(self):
         rocket = Rocket()
