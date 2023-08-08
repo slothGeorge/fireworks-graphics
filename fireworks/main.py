@@ -1,13 +1,14 @@
 import turtle
 from random import randint
 
-from projectiles.spark import Spark
+from projectiles.rocket import Rocket
 
 
 objects = []
 
 def rocket_launch():
-    rocket = Rocket()
+    global objects
+    rocket = Rocket(objects)
 
 def game_exit():
     turtle.bye()
@@ -17,30 +18,6 @@ def kill_turtle(obj):
     obj.clear()
     obj.ht()
     del obj
-
-def explode(x, y):
-    global objects
-    for i in range(randint(20, 30)):
-        spark = Spark(x, y, objects)  # temporarily passing a god object, anti-pattern
-
-class Rocket(turtle.Turtle):
-    def __init__(self):
-        global objects
-        turtle.Turtle.__init__(self)
-        self.penup()
-        self.shape("circle")
-        self.color('#FFFFFF')
-        self.goto(randint(-50,50), -300)
-        self.y_speed = 60 + randint(0, 10)
-        self.x_speed = randint(-5, 5)
-        self.y_acceleration = -6
-        self.countdown = 17
-        objects.insert(0, self)
-    def update(self):
-        self.countdown -= 1
-        if self.countdown < 0:
-            explode(self.xcor(), self.ycor())
-            kill_turtle(self)
             
 def animate():
     global objects

@@ -1,8 +1,6 @@
 from random import randint
 import turtle
 
-# from fireworks.fireworks import kill_turtle
-
 
 class Spark(turtle.Turtle):
     def __init__(self, x, y, objects):
@@ -23,7 +21,6 @@ class Spark(turtle.Turtle):
     def update(self):
         self.countdown -= 1
         if self.countdown < 0:
-            # kill_turtle(self)
             self.objects.remove(self)
             self.clear()
             self.ht()
