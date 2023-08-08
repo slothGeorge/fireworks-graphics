@@ -14,10 +14,9 @@ class Rocket(Basic_Moving_Shape):
         self.x_speed = randint(-5, 5)
         self.countdown = 17
 
-    def update(self):
-        super().update()
-        if self.countdown < 0:
-            self.explode()
+    def kill(self):
+        super().kill()
+        self.explode()
 
     def explode(self):
         for i in range(randint(20, 30)):

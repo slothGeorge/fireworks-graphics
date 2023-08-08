@@ -32,9 +32,6 @@ class Game:
     def animate(self):
         if len(self.projectiles) > 0:
             for obj in self.projectiles:
-                obj.setx(obj.xcor() + obj.x_speed)
-                obj.sety(obj.ycor() + obj.y_speed)
-                obj.y_speed += obj.y_acceleration
                 obj.update()
         self.window.ontimer(self.animate, 20)
 
