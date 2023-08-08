@@ -1,4 +1,5 @@
 from random import randint
+from time import sleep
 import turtle
 
 from projectiles.rocket import Rocket
@@ -37,12 +38,15 @@ class Game:
                 obj.update()
                 if not obj.is_alive:
                     self.kill_projectile(obj)
-        self.window.ontimer(self.animate, 20)
+        self.window.update()
+        sleep(0.02)
 
     def run(self):
-        self.animate()
         while True:
-            self.window.update()
+            try:
+                self.animate()
+            except turtle.Terminator:
+                return
 
     def rocket_launch(self):
         rocket = Rocket()
