@@ -4,5 +4,5 @@ In this repo I want to refactor one of my oldest scripts - simple fireworks GUI 
 # how to launch
 from root directory use the terminal command:
 ```
-python fireworks/fireworks.py
+python fireworks/main.py
 ```
